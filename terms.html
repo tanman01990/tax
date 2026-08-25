@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    PLACEHOLDERS — find & replace before deploying:
+    APP_NAME        → Your application name       (e.g. "MyTikApp")
+    COMPANY_NAME    → Your legal entity name      (e.g. "Acme Inc.")
+    COMPANY_EMAIL   → Legal / support email       (e.g. "legal@yourapp.com")
+    WEBSITE_URL     → Your root URL               (e.g. "https://yourapp.com")
+    GOVERNING_LAW   → Your jurisdiction           (e.g. "California, United States")
+  -->
+  <title>Terms of Service — APP_NAME</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+  <style>
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --bg:           #F4F7FB;
+      --surface:      #FFFFFF;
+      --text:         #0C1825;
+      --text-2:       #556070;
+      --accent:       #00B4BC;
+      --accent-soft:  #E5F8F9;
+      --border:       #D0DCE8;
+      --radius:       6px;
+      --f-display:    'Syne', system-ui, sans-serif;
+      --f-body:       'IBM Plex Sans', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg:           #080F1A;
+        --surface:      #0E1D2E;
+        --text:         #DDE8F5;
+        --text-2:       #7A90A8;
+        --accent:       #00C9D4;
+        --accent-soft:  #0A1D28;
+        --border:       #162538;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg:           #080F1A;
+      --surface:      #0E1D2E;
+      --text:         #DDE8F5;
+      --text-2:       #7A90A8;
+      --accent:       #00C9D4;
+      --accent-soft:  #0A1D28;
+      --border:       #162538;
+    }
+
+    /* ── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── BASE ───────────────────────────────────── */
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-underline-offset: 0.25em; }
+    strong { font-weight: 600; }
+
+    /* ── HEADER ─────────────────────────────────── */
+    .site-header {
+      background: var(--surface);
+      border-top: 3px solid var(--accent);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.875rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .doc-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    /* ── PAGE LAYOUT ────────────────────────────── */
+    .page-layout {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 8rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (min-width: 1080px) {
+      .page-layout {
+        grid-template-columns: 200px 1fr;
+        gap: 4rem;
+      }
+    }
+
+    /* ── TABLE OF CONTENTS ──────────────────────── */
+    .toc-nav { display: none; }
+
+    @media (min-width: 1080px) {
+      .toc-nav {
+        display: block;
+        position: sticky;
+        top: 64px;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+      }
+
+      .toc-label {
+        font-family: var(--f-display);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-2);
+        margin-bottom: 1rem;
+      }
+
+      .toc-list { list-style: none; }
+
+      .toc-list li { margin-bottom: 0.35rem; }
+
+      .toc-list a {
+        color: var(--text-2);
+        text-decoration: none;
+        display: block;
+        padding: 0.15rem 0 0.15rem 0.75rem;
+        border-left: 2px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+      }
+
+      .toc-list a:hover {
+        color: var(--accent);
+        border-left-color: var(--accent);
+      }
+    }
+
+    /* ── CONTENT COLUMN ─────────────────────────── */
+    .content { min-width: 0; max-width: 740px; }
+
+    .page-intro {
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-intro h1 {
+      font-family: var(--f-display);
+      font-size: clamp(1.875rem, 4vw, 2.625rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-wrap: balance;
+      margin-bottom: 1rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.625rem 2rem;
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+
+    .page-meta strong { color: var(--text); font-weight: 500; }
+
+    /* ── SECTIONS ───────────────────────────────── */
+    .doc-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section:last-of-type { border-bottom: none; }
+
+    .section-tag {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.375rem;
+    }
+
+    .doc-section h2 {
+      font-family: var(--f-display);
+      font-size: 1.1875rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+
+    .doc-section h3 {
+      font-family: var(--f-display);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-top: 1.75rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .doc-section h3:first-child { margin-top: 0; }
+
+    p { margin-bottom: 1rem; max-width: 68ch; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.375rem; max-width: 66ch; }
+
+    /* ── NOTE BOX ───────────────────────────────── */
+    .note-box {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.125rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.9375rem;
+    }
+
+    .note-box p { max-width: 100%; margin: 0; }
+
+    /* ── CONTACT CARD ───────────────────────────── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-card p { margin-bottom: 0.5rem; }
+    .contact-card p:last-child { margin-bottom: 0; }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-nav a:hover { color: var(--accent); }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="WEBSITE_URL" class="brand">APP_NAME</a>
+    <span class="doc-badge">Terms of Service</span>
+  </div>
+</header>
+
+<div class="page-layout">
+
+  <nav class="toc-nav" aria-label="Table of contents">
+    <p class="toc-label">Contents</p>
+    <ol class="toc-list">
+      <li><a href="#acceptance">Acceptance</a></li>
+      <li><a href="#service">Our Service</a></li>
+      <li><a href="#tiktok">TikTok Integration</a></li>
+      <li><a href="#accounts">Your Account</a></li>
+      <li><a href="#acceptable-use">Acceptable Use</a></li>
+      <li><a href="#content">User Content</a></li>
+      <li><a href="#ip">Intellectual Property</a></li>
+      <li><a href="#third-party">Third Parties</a></li>
+      <li><a href="#disclaimers">Disclaimers</a></li>
+      <li><a href="#liability">Limitation of Liability</a></li>
+      <li><a href="#indemnification">Indemnification</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#governing-law">Governing Law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <div class="page-intro">
+      <h1>Terms of Service</h1>
+      <div class="page-meta">
+        <span><strong>Effective:</strong> August 19, 2026</span>
+        <span><strong>Service:</strong> APP_NAME</span>
+        <span><strong>Provider:</strong> COMPANY_NAME</span>
+      </div>
+    </div>
+
+    <section class="doc-section" id="acceptance">
+      <p class="section-tag">01 — Agreement</p>
+      <h2>Acceptance of Terms</h2>
+      <p>By accessing or using APP_NAME (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use the Service.</p>
+      <p>These Terms form a legally binding agreement between you ("User," "you," or "your") and COMPANY_NAME ("Company," "we," "us," or "our"). You must be at least 13 years old to use this Service. If you are under 18, your parent or legal guardian must have reviewed and agreed to these Terms on your behalf.</p>
+      <div class="note-box">
+        <p><strong>Note:</strong> Your use of the Service is also governed by our <a href="privacy.html">Privacy Policy</a>, incorporated into these Terms by reference.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="service">
+      <p class="section-tag">02 — Service</p>
+      <h2>Our Service</h2>
+      <p>APP_NAME is an application that connects with TikTok's platform to provide tools and features related to TikTok accounts and content. The Service enables users to authorize access to their TikTok account data through TikTok's official API.</p>
+      <p>We reserve the right to modify, suspend, or discontinue the Service or any part of it at any time, with or without notice. We are not liable to you or any third party for any such modification, suspension, or discontinuation.</p>
+    </section>
+
+    <section class="doc-section" id="tiktok">
+      <p class="section-tag">03 — Integration</p>
+      <h2>TikTok Platform Integration</h2>
+      <p>APP_NAME connects to TikTok through TikTok's official API. By using features that integrate with TikTok, you acknowledge and agree that:</p>
+      <ul>
+        <li>You must hold a valid TikTok account and agree to <a href="https://www.tiktok.com/legal/page/global/terms-of-service/en" target="_blank" rel="noopener noreferrer">TikTok's Terms of Service</a> and all related policies.</li>
+        <li>You authorize APP_NAME to access your TikTok account data as described in our Privacy Policy and within the permissions you grant during the OAuth authorization flow.</li>
+        <li>TikTok is an independent platform; your use of TikTok is governed solely by TikTok's own terms and policies.</li>
+        <li>APP_NAME is not affiliated with, endorsed by, or sponsored by TikTok or ByteDance Ltd.</li>
+        <li>You may revoke APP_NAME's access to your TikTok account at any time through TikTok's Connected Apps settings or through your settings within our Service.</li>
+      </ul>
+      <p>We access and use TikTok data only as permitted by TikTok's Platform Policy and as disclosed in our Privacy Policy. TikTok data is never used for any undisclosed purpose.</p>
+    </section>
+
+    <section class="doc-section" id="accounts">
+      <p class="section-tag">04 — Accounts</p>
+      <h2>Your Account</h2>
+      <h3>Account Creation</h3>
+      <p>To access certain features, you may need to create an account. You agree to provide accurate, current, and complete information at registration and to keep it updated.</p>
+      <h3>Account Security</h3>
+      <p>You are responsible for maintaining the confidentiality of your credentials and for all activity under your account. Notify us immediately at COMPANY_EMAIL if you suspect unauthorized access. We are not liable for losses arising from unauthorized use of your account.</p>
+      <h3>Account Deletion</h3>
+      <p>You may delete your account at any time by contacting COMPANY_EMAIL. Upon deletion, we will handle your data as described in our Privacy Policy, including honoring any applicable data retention obligations.</p>
+    </section>
+
+    <section class="doc-section" id="acceptable-use">
+      <p class="section-tag">05 — Rules</p>
+      <h2>Acceptable Use</h2>
+      <p>You agree not to use the Service to:</p>
+      <ul>
+        <li>Violate any applicable laws, regulations, or TikTok's platform policies</li>
+        <li>Infringe the intellectual property or privacy rights of any person or entity</li>
+        <li>Upload, post, or transmit content that is unlawful, harmful, defamatory, obscene, or otherwise objectionable</li>
+        <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity</li>
+        <li>Scrape, harvest, or otherwise collect TikTok or user data in ways not permitted by these Terms or TikTok's policies</li>
+        <li>Attempt unauthorized access to any part of the Service or its infrastructure</li>
+        <li>Send unsolicited messages, spam, or engage in any form of automated bulk outreach</li>
+        <li>Reverse-engineer, decompile, or disassemble any part of the Service</li>
+        <li>Interfere with or disrupt the integrity or performance of the Service</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="content">
+      <p class="section-tag">06 — Content</p>
+      <h2>User Content</h2>
+      <h3>Your Content</h3>
+      <p>You retain ownership of content you submit, post, or display through the Service ("User Content"). By submitting User Content, you grant COMPANY_NAME a non-exclusive, worldwide, royalty-free license to use, display, and process that content solely to operate and improve the Service.</p>
+      <h3>TikTok Content</h3>
+      <p>Content originating from TikTok — videos, descriptions, profile information — remains subject to TikTok's terms and the rights of the respective creators. We claim no ownership over TikTok content accessed through the Service.</p>
+      <h3>Content Standards</h3>
+      <p>You warrant that your User Content does not violate any third-party rights (including intellectual property and privacy rights) and complies with these Terms and applicable law.</p>
+    </section>
+
+    <section class="doc-section" id="ip">
+      <p class="section-tag">07 — Ownership</p>
+      <h2>Intellectual Property</h2>
+      <p>The Service and its original content, features, and functionality — excluding User Content and TikTok content — are the exclusive property of COMPANY_NAME and its licensors, protected by copyright, trademark, and other applicable laws.</p>
+      <p>Nothing in these Terms grants you any right, title, or interest in the Service, our trademarks, or other intellectual property. Our marks may not be used without prior written consent.</p>
+    </section>
+
+    <section class="doc-section" id="third-party">
+      <p class="section-tag">08 — Third Parties</p>
+      <h2>Third-Party Services</h2>
+      <p>The Service integrates with or links to third-party services, including TikTok. We are not responsible for the content, privacy practices, or terms of any third-party service. Your use of third-party services is at your own risk and subject to those services' respective terms.</p>
+      <p>TikTok's availability and API are controlled by TikTok and may be changed or discontinued at any time. We are not liable for loss of service, features, or data resulting from changes to TikTok's platform or API policies.</p>
+    </section>
+
+    <section class="doc-section" id="disclaimers">
+      <p class="section-tag">09 — Disclaimers</p>
+      <h2>Disclaimers</h2>
+      <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.</p>
+      <p>We do not warrant that the Service will be uninterrupted, error-free, or free of harmful components. We do not warrant the accuracy or completeness of any content available through the Service, including content obtained from TikTok.</p>
+    </section>
+
+    <section class="doc-section" id="liability">
+      <p class="section-tag">10 — Liability</p>
+      <h2>Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, COMPANY_NAME AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND LICENSORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES — INCLUDING LOSS OF PROFITS, DATA, OR GOODWILL — ARISING OUT OF OR RELATED TO THESE TERMS OR YOUR USE OF THE SERVICE.</p>
+      <p>IN NO EVENT SHALL OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS EXCEED THE GREATER OF (A) THE AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE CLAIM, OR (B) $100 USD.</p>
+    </section>
+
+    <section class="doc-section" id="indemnification">
+      <p class="section-tag">11 — Indemnification</p>
+      <h2>Indemnification</h2>
+      <p>You agree to indemnify, defend, and hold harmless COMPANY_NAME and its officers, directors, employees, agents, and licensors from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of or related to: (a) your use of the Service; (b) your User Content; (c) your violation of these Terms; or (d) your infringement of any third-party rights.</p>
+    </section>
+
+    <section class="doc-section" id="termination">
+      <p class="section-tag">12 — Termination</p>
+      <h2>Termination</h2>
+      <p>We may terminate or suspend your access to the Service immediately and without prior notice for any reason, including breach of these Terms. Upon termination, your right to use the Service ceases immediately.</p>
+      <p>Provisions that by their nature should survive termination — including ownership, disclaimers, indemnification, and liability limitations — will remain in effect.</p>
+    </section>
+
+    <section class="doc-section" id="changes">
+      <p class="section-tag">13 — Updates</p>
+      <h2>Changes to These Terms</h2>
+      <p>We may modify these Terms at any time. For material changes, we will update the "Effective" date above and, where appropriate, notify you via the Service or your registered email address.</p>
+      <p>Continued use of the Service after changes take effect constitutes acceptance of the revised Terms. If you disagree with updated Terms, you must stop using the Service.</p>
+    </section>
+
+    <section class="doc-section" id="governing-law">
+      <p class="section-tag">14 — Legal</p>
+      <h2>Governing Law</h2>
+      <p>These Terms are governed by the laws of GOVERNING_LAW, without regard to conflict-of-law principles. Any dispute arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in GOVERNING_LAW.</p>
+      <p>If any provision of these Terms is held invalid or unenforceable, the remaining provisions continue in full force.</p>
+    </section>
+
+    <section class="doc-section" id="contact">
+      <p class="section-tag">15 — Contact</p>
+      <h2>Contact Us</h2>
+      <p>Questions about these Terms? Reach us at:</p>
+      <div class="contact-card">
+        <p><strong>COMPANY_NAME</strong></p>
+        <p>Email: <a href="mailto:COMPANY_EMAIL">COMPANY_EMAIL</a></p>
+        <p>Website: <a href="WEBSITE_URL">WEBSITE_URL</a></p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 COMPANY_NAME. All rights reserved.</p>
+  <nav class="footer-nav" aria-label="Legal pages">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="WEBSITE_URL">Home</a>
+  </nav>
+</footer>
+
+</body>
+</html>

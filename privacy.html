@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    PLACEHOLDERS — find & replace before deploying:
+    APP_NAME        → Your application name       (e.g. "MyTikApp")
+    COMPANY_NAME    → Your legal entity name      (e.g. "Acme Inc.")
+    COMPANY_EMAIL   → Legal / support email       (e.g. "legal@yourapp.com")
+    WEBSITE_URL     → Your root URL               (e.g. "https://yourapp.com")
+    GOVERNING_LAW   → Your jurisdiction           (e.g. "California, United States")
+  -->
+  <title>Privacy Policy — APP_NAME</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+  <style>
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --bg:           #F4F7FB;
+      --surface:      #FFFFFF;
+      --text:         #0C1825;
+      --text-2:       #556070;
+      --accent:       #00B4BC;
+      --accent-soft:  #E5F8F9;
+      --border:       #D0DCE8;
+      --radius:       6px;
+      --f-display:    'Syne', system-ui, sans-serif;
+      --f-body:       'IBM Plex Sans', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg:           #080F1A;
+        --surface:      #0E1D2E;
+        --text:         #DDE8F5;
+        --text-2:       #7A90A8;
+        --accent:       #00C9D4;
+        --accent-soft:  #0A1D28;
+        --border:       #162538;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg:           #080F1A;
+      --surface:      #0E1D2E;
+      --text:         #DDE8F5;
+      --text-2:       #7A90A8;
+      --accent:       #00C9D4;
+      --accent-soft:  #0A1D28;
+      --border:       #162538;
+    }
+
+    /* ── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── BASE ───────────────────────────────────── */
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-underline-offset: 0.25em; }
+    strong { font-weight: 600; }
+
+    /* ── HEADER ─────────────────────────────────── */
+    .site-header {
+      background: var(--surface);
+      border-top: 3px solid var(--accent);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.875rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .doc-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    /* ── PAGE LAYOUT ────────────────────────────── */
+    .page-layout {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 8rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (min-width: 1080px) {
+      .page-layout {
+        grid-template-columns: 200px 1fr;
+        gap: 4rem;
+      }
+    }
+
+    /* ── TABLE OF CONTENTS ──────────────────────── */
+    .toc-nav { display: none; }
+
+    @media (min-width: 1080px) {
+      .toc-nav {
+        display: block;
+        position: sticky;
+        top: 64px;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+      }
+
+      .toc-label {
+        font-family: var(--f-display);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-2);
+        margin-bottom: 1rem;
+      }
+
+      .toc-list { list-style: none; }
+      .toc-list li { margin-bottom: 0.35rem; }
+
+      .toc-list a {
+        color: var(--text-2);
+        text-decoration: none;
+        display: block;
+        padding: 0.15rem 0 0.15rem 0.75rem;
+        border-left: 2px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+      }
+
+      .toc-list a:hover {
+        color: var(--accent);
+        border-left-color: var(--accent);
+      }
+    }
+
+    /* ── CONTENT COLUMN ─────────────────────────── */
+    .content { min-width: 0; max-width: 740px; }
+
+    .page-intro {
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-intro h1 {
+      font-family: var(--f-display);
+      font-size: clamp(1.875rem, 4vw, 2.625rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-wrap: balance;
+      margin-bottom: 1rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.625rem 2rem;
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+
+    .page-meta strong { color: var(--text); font-weight: 500; }
+
+    /* ── SECTIONS ───────────────────────────────── */
+    .doc-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section:last-of-type { border-bottom: none; }
+
+    .section-tag {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.375rem;
+    }
+
+    .doc-section h2 {
+      font-family: var(--f-display);
+      font-size: 1.1875rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+
+    .doc-section h3 {
+      font-family: var(--f-display);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-top: 1.75rem;
+      margin-bottom: 0.625rem;
+    }
+
+    .doc-section h3:first-child { margin-top: 0; }
+
+    p { margin-bottom: 1rem; max-width: 68ch; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.375rem; max-width: 66ch; }
+
+    /* ── DATA TABLE ─────────────────────────────── */
+    .data-table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .data-table th {
+      font-family: var(--f-display);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-align: left;
+      padding: 0.625rem 1rem 0.625rem 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 0.75rem 1rem 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ── NOTE BOX ───────────────────────────────── */
+    .note-box {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.125rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.9375rem;
+    }
+
+    .note-box p { max-width: 100%; margin: 0; }
+
+    /* ── CONTACT CARD ───────────────────────────── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-card p { margin-bottom: 0.5rem; }
+    .contact-card p:last-child { margin-bottom: 0; }
+
+    /* ── RIGHTS GRID ────────────────────────────── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    .right-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.125rem;
+    }
+
+    .right-item strong {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .right-item p {
+      font-size: 0.8125rem;
+      color: var(--text-2);
+      max-width: 100%;
+      margin: 0;
+    }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-2);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-nav a:hover { color: var(--accent); }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="WEBSITE_URL" class="brand">APP_NAME</a>
+    <span class="doc-badge">Privacy Policy</span>
+  </div>
+</header>
+
+<div class="page-layout">
+
+  <nav class="toc-nav" aria-label="Table of contents">
+    <p class="toc-label">Contents</p>
+    <ol class="toc-list">
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#what-we-collect">What We Collect</a></li>
+      <li><a href="#tiktok-data">TikTok Data</a></li>
+      <li><a href="#how-we-use">How We Use It</a></li>
+      <li><a href="#sharing">Data Sharing</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#international">International Transfers</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <div class="page-intro">
+      <h1>Privacy Policy</h1>
+      <div class="page-meta">
+        <span><strong>Effective:</strong> August 19, 2026</span>
+        <span><strong>Service:</strong> APP_NAME</span>
+        <span><strong>Provider:</strong> COMPANY_NAME</span>
+      </div>
+    </div>
+
+    <section class="doc-section" id="introduction">
+      <p class="section-tag">01 — Overview</p>
+      <h2>Introduction</h2>
+      <p>COMPANY_NAME ("we," "us," or "our") operates APP_NAME (the "Service"). This Privacy Policy explains what information we collect, how we use it, and the choices you have regarding your data.</p>
+      <p>By using the Service, you agree to the collection and use of information in accordance with this Policy. We are committed to protecting your privacy and handling your data with transparency.</p>
+      <div class="note-box">
+        <p>APP_NAME integrates with TikTok's platform. When you connect your TikTok account, we access data only within the scope of permissions you explicitly grant. This Policy describes that data and how we use it.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="what-we-collect">
+      <p class="section-tag">02 — Data Collection</p>
+      <h2>Information We Collect</h2>
+
+      <h3>Information You Provide Directly</h3>
+      <ul>
+        <li><strong>Account information:</strong> name, email address, and password when you register for an account</li>
+        <li><strong>Communications:</strong> messages, feedback, or support requests you send us</li>
+        <li><strong>Profile information:</strong> any optional profile details you choose to add</li>
+      </ul>
+
+      <h3>TikTok Account Data</h3>
+      <p>When you connect your TikTok account via TikTok's OAuth flow, we may collect, depending on the permissions you grant:</p>
+      <div class="data-table-wrap">
+        <table class="data-table" aria-label="TikTok data we may collect">
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Examples</th>
+              <th>Permission Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Basic profile</td>
+              <td>TikTok user ID, display name, avatar URL, bio</td>
+              <td>user.info.basic</td>
+            </tr>
+            <tr>
+              <td>Account statistics</td>
+              <td>Follower count, following count, likes received</td>
+              <td>user.info.stats</td>
+            </tr>
+            <tr>
+              <td>Video list</td>
+              <td>Video IDs, titles, cover images, view/like/comment counts</td>
+              <td>video.list</td>
+            </tr>
+            <tr>
+              <td>Video upload</td>
+              <td>Content submitted through our Service for posting to TikTok</td>
+              <td>video.upload</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>We request only the permissions necessary to provide the features you use. You may revoke access at any time through TikTok's Connected Apps settings.</p>
+
+      <h3>Usage Information</h3>
+      <ul>
+        <li>Pages and features you access within the Service</li>
+        <li>Actions you take (clicks, searches, filters applied)</li>
+        <li>Timestamps and session durations</li>
+        <li>Referring pages or sources</li>
+      </ul>
+
+      <h3>Device and Technical Information</h3>
+      <ul>
+        <li>IP address and approximate geographic location (country / region)</li>
+        <li>Browser type and version, operating system</li>
+        <li>Device type and screen resolution</li>
+        <li>Cookies and similar tracking technologies (see <a href="#cookies">Cookies</a>)</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="tiktok-data">
+      <p class="section-tag">03 — TikTok</p>
+      <h2>TikTok Data Usage</h2>
+      <p>We access TikTok data solely through TikTok's official API and only with your explicit authorization. Our use of TikTok data is governed by <a href="https://developers.tiktok.com/doc/overview/" target="_blank" rel="noopener noreferrer">TikTok's Platform Policy</a> in addition to this Privacy Policy.</p>
+      <p>Specifically, regarding TikTok data:</p>
+      <ul>
+        <li><strong>Limited use:</strong> TikTok data is used only to provide and improve the features of APP_NAME that you have requested. It is never sold, rented, or shared with advertisers.</li>
+        <li><strong>No secondary use:</strong> We do not use TikTok user data to build advertising profiles, track users across third-party sites, or for any purpose unrelated to the Service.</li>
+        <li><strong>Retention:</strong> TikTok data is retained only as long as necessary to provide the Service. When you disconnect your TikTok account or delete your account, we delete associated TikTok data within 30 days.</li>
+        <li><strong>No transfer:</strong> TikTok data is not transferred to any third party except our infrastructure providers (e.g., cloud hosting) who process it only to deliver the Service.</li>
+        <li><strong>Security:</strong> TikTok access tokens are stored encrypted and are never logged in plaintext.</li>
+      </ul>
+      <p>You can disconnect your TikTok account from APP_NAME at any time through your account settings or directly through TikTok's app under <em>Settings &amp; Privacy → Security → Connected Apps</em>.</p>
+    </section>
+
+    <section class="doc-section" id="how-we-use">
+      <p class="section-tag">04 — Usage</p>
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li><strong>Provide the Service:</strong> authenticate your account, display your TikTok data, and enable Service features</li>
+        <li><strong>Improve the Service:</strong> analyze usage patterns to understand which features are valued and where to invest improvements</li>
+        <li><strong>Communicate with you:</strong> send service notifications, security alerts, and respond to your support requests</li>
+        <li><strong>Ensure security:</strong> detect and prevent fraud, abuse, or unauthorized access</li>
+        <li><strong>Comply with legal obligations:</strong> meet applicable legal, regulatory, and contractual requirements</li>
+        <li><strong>Enforce our Terms:</strong> investigate and address violations of our Terms of Service</li>
+      </ul>
+      <p>We process your information based on: performance of our contract with you (to provide the Service), our legitimate interests (security and improvement), your consent (where required), and legal obligations.</p>
+    </section>
+
+    <section class="doc-section" id="sharing">
+      <p class="section-tag">05 — Sharing</p>
+      <h2>Information Sharing</h2>
+      <p>We do not sell your personal information. We may share information in the following limited circumstances:</p>
+
+      <h3>Service Providers</h3>
+      <p>We engage trusted third-party companies to help operate the Service (e.g., cloud hosting, analytics, email delivery). These providers access your data only to perform services on our behalf and are contractually required to protect it.</p>
+
+      <h3>Legal Requirements</h3>
+      <p>We may disclose information if required to do so by law, regulation, or legal process, or if we believe disclosure is necessary to protect our rights, your safety, or the safety of others.</p>
+
+      <h3>Business Transfers</h3>
+      <p>If COMPANY_NAME is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you before your information is transferred and becomes subject to a different privacy policy.</p>
+
+      <h3>With Your Consent</h3>
+      <p>We may share information for other purposes with your explicit consent.</p>
+    </section>
+
+    <section class="doc-section" id="retention">
+      <p class="section-tag">06 — Retention</p>
+      <h2>Data Retention</h2>
+      <p>We retain your personal information for as long as your account is active or as needed to provide the Service. Specifically:</p>
+      <ul>
+        <li><strong>Account data:</strong> retained until you delete your account, plus up to 90 days for backup and audit purposes</li>
+        <li><strong>TikTok data:</strong> deleted within 30 days of account disconnection or deletion</li>
+        <li><strong>Usage logs:</strong> retained for up to 12 months for security and performance analysis</li>
+        <li><strong>Legal obligations:</strong> some data may be retained longer where required by applicable law</li>
+      </ul>
+      <p>To request deletion of your data, contact us at COMPANY_EMAIL. We will fulfill requests within 30 days, subject to legal retention requirements.</p>
+    </section>
+
+    <section class="doc-section" id="your-rights">
+      <p class="section-tag">07 — Your Rights</p>
+      <h2>Your Rights and Choices</h2>
+      <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+      <div class="rights-grid">
+        <div class="right-item">
+          <strong>Access</strong>
+          <p>Request a copy of the personal data we hold about you.</p>
+        </div>
+        <div class="right-item">
+          <strong>Correction</strong>
+          <p>Request that inaccurate or incomplete data be corrected.</p>
+        </div>
+        <div class="right-item">
+          <strong>Deletion</strong>
+          <p>Request deletion of your personal data ("right to be forgotten").</p>
+        </div>
+        <div class="right-item">
+          <strong>Portability</strong>
+          <p>Receive your data in a structured, machine-readable format.</p>
+        </div>
+        <div class="right-item">
+          <strong>Objection</strong>
+          <p>Object to processing based on legitimate interests.</p>
+        </div>
+        <div class="right-item">
+          <strong>Restriction</strong>
+          <p>Request that we limit how we process your data in certain circumstances.</p>
+        </div>
+      </div>
+      <p>To exercise any of these rights, contact us at <a href="mailto:COMPANY_EMAIL">COMPANY_EMAIL</a>. We will respond within 30 days. You also have the right to lodge a complaint with your local data protection authority.</p>
+    </section>
+
+    <section class="doc-section" id="cookies">
+      <p class="section-tag">08 — Cookies</p>
+      <h2>Cookies and Tracking</h2>
+      <p>We use cookies and similar technologies to operate and improve the Service. Cookies are small text files stored on your device.</p>
+
+      <h3>Essential Cookies</h3>
+      <p>Required for the Service to function (e.g., session authentication, security tokens). These cannot be disabled without affecting Service functionality.</p>
+
+      <h3>Analytics Cookies</h3>
+      <p>Help us understand how users interact with the Service so we can improve it. We use aggregate, anonymized data and do not build individual profiles for advertising purposes.</p>
+
+      <h3>Managing Cookies</h3>
+      <p>You can control cookies through your browser settings. Disabling cookies may limit some features of the Service. For more information on managing cookies, visit <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener noreferrer">allaboutcookies.org</a>.</p>
+    </section>
+
+    <section class="doc-section" id="security">
+      <p class="section-tag">09 — Security</p>
+      <h2>Security</h2>
+      <p>We implement industry-standard security measures to protect your information, including:</p>
+      <ul>
+        <li>Encryption of data in transit using TLS/HTTPS</li>
+        <li>Encryption of sensitive data (including TikTok access tokens) at rest</li>
+        <li>Access controls limiting data access to authorized personnel only</li>
+        <li>Regular security reviews and dependency updates</li>
+      </ul>
+      <p>No method of transmission or storage is 100% secure. If you become aware of a security vulnerability or breach, please contact us immediately at COMPANY_EMAIL.</p>
+    </section>
+
+    <section class="doc-section" id="children">
+      <p class="section-tag">10 — Children</p>
+      <h2>Children's Privacy</h2>
+      <p>The Service is not directed at children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided us with personal information, please contact us at COMPANY_EMAIL and we will delete that information promptly.</p>
+      <p>Users between 13 and 18 should review these Terms and this Policy with a parent or guardian.</p>
+    </section>
+
+    <section class="doc-section" id="international">
+      <p class="section-tag">11 — Transfers</p>
+      <h2>International Data Transfers</h2>
+      <p>COMPANY_NAME is based in GOVERNING_LAW. If you access the Service from outside this jurisdiction, your information may be transferred to and processed in a country with different data protection laws than your own.</p>
+      <p>Where required, we rely on appropriate transfer mechanisms (such as Standard Contractual Clauses) to ensure your data is protected when transferred internationally. By using the Service, you consent to such transfers in accordance with this Policy.</p>
+    </section>
+
+    <section class="doc-section" id="changes">
+      <p class="section-tag">12 — Updates</p>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the "Effective" date above and notify you via the Service or your registered email address.</p>
+      <p>We encourage you to review this Policy periodically. Continued use of the Service after changes take effect constitutes acceptance of the revised Policy.</p>
+    </section>
+
+    <section class="doc-section" id="contact">
+      <p class="section-tag">13 — Contact</p>
+      <h2>Contact Us</h2>
+      <p>If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us:</p>
+      <div class="contact-card">
+        <p><strong>COMPANY_NAME</strong></p>
+        <p>Privacy inquiries: <a href="mailto:COMPANY_EMAIL">COMPANY_EMAIL</a></p>
+        <p>Website: <a href="WEBSITE_URL">WEBSITE_URL</a></p>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9375rem; color: var(--text-2);">We aim to respond to all privacy requests within 30 days.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 COMPANY_NAME. All rights reserved.</p>
+  <nav class="footer-nav" aria-label="Legal pages">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="WEBSITE_URL">Home</a>
+  </nav>
+</footer>
+
+</body>
+</html>
